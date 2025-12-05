@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     citiesButton.addEventListener('click', function() {
         const countryValue=country.value;
-        const url = `world.php?country=${encodeURIComponent(countryValue)}`;
+        const url = `world.php?country=${encodeURIComponent(countryValue)}&lookup=cities`;
 
         fetch(url)
         .then(aj_resp => aj_resp.text())
