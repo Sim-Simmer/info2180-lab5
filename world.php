@@ -6,18 +6,32 @@ $dbname = 'world';
 
 $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
 
-$country = '';
+$country='';
 if (array_key_exists('country', $_GET)) {
     $country = $_GET['country'];
 }
 
 $query = "SELECT * FROM countries WHERE name LIKE '%$country%'";
 
-$results = $conn->query($query)->fetchAll(PDO::FETCH_ASSOC);
+$countries = $conn->query($query)->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
-<ul>
-<?php foreach ($results as $row): ?>
-  <li><?= $row['name'] . ' is ruled by ' . $row['head_of_state']; ?></li>
-<?php endforeach; ?>
-</ul>
+<table>
+  <tr>
+    <th>Country Name</th>
+    <th>Continent</th>
+    <th>Independence Year</th>
+    <th>Head of State</th>
+  </tr>
+
+
+<?php foreach($countries as $i): ?>
+  <tr>
+    <td><?=$i['name'] ?></td>
+    <td><?=$i['continent'] ?></td>
+    <td><?=$i['independence_year'] ?></td>
+    <td><?=$i['head_of_state'] ?></td>
+  </tr>
+<?php endforeach; 
+?>
+</table>
